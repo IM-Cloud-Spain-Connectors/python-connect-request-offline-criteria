@@ -1,16 +1,16 @@
 from unittest.mock import Mock
 
 from connect.eaas.core.responses import ProcessingResponse
-from rndi.connect.business_objects.adapters import Request, Asset
+from rndi.connect.business_objects.adapters import Asset, Request
 from rndi.connect.business_transaction_middleware.middleware import make_middleware_callstack
 from rndi.connect.business_transactions.adapters import prepare
 from rndi.connect.business_transactions.contracts import BackgroundTransaction
-from rndi.connect.request_offline_criteria.adapters import OfflineCriteria, DefaultOnMatchTransaction
+from rndi.connect.request_offline_criteria.adapters import DefaultOnMatchTransaction, OfflineCriteria
 from rndi.connect.request_offline_criteria.rules import (
     composited_match_offline_asset_and_marketplace_parameter,
-    match_request_type,
     match_offline_asset_parameter,
     match_offline_marketplace_parameter,
+    match_request_type,
 )
 
 
@@ -236,13 +236,13 @@ def test_default_on_match_transaction_should_approve_given_request_successfully(
     logger.info = __logger_info
 
     client = sync_client_factory([
-        response_factory(value=request.raw(), status=200)
+        response_factory(value=request.raw(), status=200),
     ])
 
     default_on_match = DefaultOnMatchTransaction(
         activation_tpl,
         client,
-        logger
+        logger,
     )
 
     asset = request.asset()

@@ -2,6 +2,7 @@ from collections import namedtuple
 from collections.abc import Iterable
 from types import MethodType
 from urllib.parse import parse_qs
+
 from connect.client import ConnectClient
 import pytest
 import requests
